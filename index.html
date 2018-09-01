@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>levi9</title>
+
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<h1>The Guardian News</h1>
+		<button onclick="myFunction()">Refresh</button>
+		<template id="accordion">
+			<ul class="accordion">
+				<li>
+					<a class="toggle" href="javascript:void(0);">Item 1</a>
+					<ul class="inner">
+						<li>Option 1</li>
+					</ul>
+				</li>
+		</template>
+	</div>
+
+
+
+	<script>
+		function myFunction() {
+			window.location.reload();
+		}
+		function createCats(param) {
+			var list = document.querySelector("#accordion")
+			var main = document.querySelector(".wrapper")
+			var newList = list.content.cloneNode(true);
+			var text = newList.querySelector('.inner li')
+			newList.querySelector('.toggle').textContent = param.sectionName;
+			main.appendChild(newList)
+			fetch('http://content.guardianapis.com/small-business-network/2016/feb/22/startup-of-the-year-competition-entry-pavillion-at-the-park?showblocks=body&api-key=7d20aee1-371a-4142-b225-eadb439e1a84')
+				.then(
+					function (response) {
+						response.json().then(function (data) {
+							var result = data.response.content
+							text.textContent = result.apiUrl
+						});
+					}
+				)
+		}
+		fetch('https://content.guardianapis.com/search?api-key=7d20aee1-371a-4142-b225-eadb439e1a84')
+			.then(
+				function (response) {
+					response.json().then(function (data) {
+						var result = data.response.results
+						for (var key in result) {
+							createCats(result[key])
+						}
+					});
+				}
+			)
+
+		$('.toggle').click(function (e) {
+			e.preventDefault();
+
+			var $this = $(this);
+
+			if ($this.next().hasClass('show')) {
+				$this.next().removeClass('show');
+				$this.next().slideUp(350);
+			} else {
+				$this.parent().parent().find('li .inner').removeClass('show');
+				$this.parent().parent().find('li .inner').slideUp(350);
+				$this.next().toggleClass('show');
+				$this.next().slideToggle(350);
+			}
+		});
+	</script>
+</body>
+
+</html>
