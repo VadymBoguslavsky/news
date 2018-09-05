@@ -5,9 +5,9 @@ function createList(param) {
   var list = document.querySelector("#list")
   var main = document.querySelector(".wrapper")
   var newList = list.content.cloneNode(true);
-  newList.querySelector('.accordion').textContent = param.sectionName;
   var text = newList.querySelector('.panel p');
   var btn = newList.querySelector('.accordion');
+  btn.textContent = param.sectionName;
 
   function createText(el) {
     const urlText = 'https://content.guardianapis.com/small-business-network/2016/feb/22/startup-of-the-year-competition-entry-pavillion-at-the-park?showblocks=body&api-key=7d20aee1-371a-4142-b225-eadb439e1a84'
