@@ -1,7 +1,7 @@
   function myFunction() {
    window.location.reload();
   }
-  function createCats(param) {
+  function createList(param) {
    var button = document.createElement("button")
    button.classList.add("accordion")
    var main = document.querySelector(".wrapper")
@@ -29,7 +29,7 @@
      response.json().then(function (data) {
       var result = data.response.results
       for (var key in result) {
-       createCats(result[key])
+       createList(result[key])
       }
      });
     }

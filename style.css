@@ -1,9 +1,11 @@
-.wrapper{
+.wrapper {
   text-align: center
 }
-.refresh{
+
+.refresh {
   margin: 10px;
 }
+
 .accordion {
   background-color: #eee;
   color: #444;
